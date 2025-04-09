@@ -1,0 +1,30 @@
+name: prueba1
+
+topology:
+  kinds:
+    nokia_srlinux:
+      type: ixrd2l
+      image: ghcr.io/nokia/srlinux
+  nodes:
+    r1:
+      kind: nokia_srlinux
+      startup-config: configs/r1.conf
+    r2:
+      kind: nokia_srlinux
+      startup-config: configs/r2.conf
+    r3:
+      kind: nokia_srlinux
+      startup-config: configs/r3.conf
+    r4:
+      kind: nokia_srlinux
+      startup-config: configs/r4.conf
+    r5:
+      kind: nokia_srlinux
+      startup-config: configs/r5.conf
+  links:
+    - endpoints: ["r1:e1-1", "r2:e1-1"]
+    - endpoints: ["r2:e1-2", "r3:e1-1"]
+    - endpoints: ["r2:e1-3", "r4:e1-1"]
+    - endpoints: ["r3:e1-2", "r5:e1-1"]
+    - endpoints: ["r4:e1-2", "r5:e1-2"]
+      
