@@ -5,6 +5,9 @@ topology:
     nokia_srlinux:
       type: ixrd2l
       image: ghcr.io/nokia/srlinux
+    linux:
+      type: linux
+      image: alpine:latest
   nodes:
     r1:
       kind: nokia_srlinux
@@ -21,10 +24,22 @@ topology:
     r5:
       kind: nokia_srlinux
       startup-config: configs/r5.conf
+    h1:
+      kind: linux
+      exec:
+        - ip link set dev eth1 up
+        - ip addr add 192.168.1.1/31 dev eth1
+    h2:
+      kind: linux
+      exec:
+        - ip link set dev eth1 up
+        - ip addr add 192.168.60.1/31 dev eth1
   links:
     - endpoints: ["r1:e1-1", "r2:e1-1"]
     - endpoints: ["r2:e1-2", "r3:e1-1"]
     - endpoints: ["r2:e1-3", "r4:e1-1"]
     - endpoints: ["r3:e1-2", "r5:e1-1"]
     - endpoints: ["r4:e1-2", "r5:e1-2"]
+    - endpoints: ["r1:e1-2", "h1:eth1"]
+    - endpoints: ["r5:e1-3", "h2:eth1"]
       
