@@ -1,0 +1,8 @@
+hostname R4
+!
+interface e0/1
+    ip address 10.10.20.2 255.255.255.252
+    no shutdown
+   
+!
+end
